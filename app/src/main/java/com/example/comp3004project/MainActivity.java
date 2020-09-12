@@ -1,6 +1,8 @@
 package com.example.comp3004project;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -11,6 +13,14 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    public void clickButton(View view){
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText("Test successful");
+
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
