@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void clickButton(View view){
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText("Test successful");
+//        TextView textView = (TextView) findViewById(R.id.textView);
+//        textView.setText("Test successful");
 
 
     }
