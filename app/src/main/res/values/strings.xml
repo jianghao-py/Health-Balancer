@@ -17,4 +17,11 @@
     <string name="setting">Setting</string>
     <string name="information">information</string>
     <string name="logout">logout</string>
+    <string name="LoginBackground">LoginBackground</string>
+    <string name="editTextHint_Email">email</string>
+    <string name="editTextHint_Password">password</string>
+    <string name="LoginButton">Login</string>
+    <string name="goResgisterButton">Resgister</string>
+    <string name="signupButton">Sign Up</string>
+    <string name="goLoginButton">to Login </string>
 </resources>

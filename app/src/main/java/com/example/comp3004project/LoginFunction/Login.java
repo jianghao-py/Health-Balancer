@@ -42,7 +42,7 @@ public class Login extends AppCompatActivity {
 
         inputEmail = (EditText) findViewById(R.id.editTextTextPersonName4);
         inputPassword = (EditText) findViewById(R.id.editTextTextPersonName5);
-        signInButton = (Button) findViewById(R.id.button4);
+        signInButton = (Button) findViewById(R.id.log_in);
         goRegisterButton = (Button) findViewById(R.id.button5);
 
         mAuth = FirebaseAuth.getInstance();

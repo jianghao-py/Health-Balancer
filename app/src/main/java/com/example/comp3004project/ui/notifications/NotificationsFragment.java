@@ -48,7 +48,7 @@ public class NotificationsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
         textViewTitle = root.findViewById(R.id.textView);
 
-        logoutButton = root.findViewById(R.id.button6);
+        logoutButton = root.findViewById(R.id.logout);
 
 
         return root;
@@ -60,13 +60,6 @@ public class NotificationsFragment extends Fragment {
 
         notificationsViewModel =
                 ViewModelProviders.of(this).get(NotificationsViewModel.class);
-
-        notificationsViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textViewTitle.setText(s);
-            }
-        });
 
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
