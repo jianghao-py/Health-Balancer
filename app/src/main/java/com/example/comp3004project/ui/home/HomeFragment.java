@@ -13,23 +13,55 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.comp3004project.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    TextView textViewTitle;
+    FirebaseUser user;
+    String FireBaseUserName;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
+
+
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        textViewTitle = root.findViewById(R.id.textView2);
+
         return root;
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+        /*
+        homeViewModel.getUserName().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                textViewTitle.setText(s);
+            }
+        });
+         */
+
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        for(UserInfo profile : user.getProviderData()){
+            FireBaseUserName = profile.getUid();
+            textViewTitle.setText("Welcome "+FireBaseUserName);
+        }
+
+
+
+
+    }
+
+
+
+
+
 }

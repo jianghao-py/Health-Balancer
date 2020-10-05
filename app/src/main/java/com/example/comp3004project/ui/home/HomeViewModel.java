@@ -4,16 +4,31 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<String> firebaseUserName;
+    String name;
 
     public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<String> getUserName() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!= null){
+            for(UserInfo profile:user.getProviderData()){
+                name = profile.getDisplayName();
+            }
+        }
+        if(firebaseUserName ==null){
+            firebaseUserName = new MutableLiveData<>();
+            firebaseUserName.setValue("Welcome "+name);
+        }
+
+        return firebaseUserName;
     }
 }

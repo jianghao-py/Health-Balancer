@@ -9,11 +9,15 @@ public class NotificationsViewModel extends ViewModel {
     private MutableLiveData<String> mText;
 
     public NotificationsViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        //mText = new MutableLiveData<>();
+       // mText.setValue("This is notifications fragment");
     }
 
     public LiveData<String> getText() {
+        if(mText ==null){
+            mText = new MutableLiveData<>();
+            mText.setValue("Personal File");
+        }
         return mText;
     }
 }

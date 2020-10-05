@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.comp3004project.LoginFunction.Resgister;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -18,11 +19,6 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
 
-    /**@Jianghao Li
-     * Log out Button in mainActivity for test my register, don't know how fragment works yet.
-     *
-     */
-    private  Button logOut;
 
 
 
@@ -41,15 +37,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        logOut = (Button) findViewById(R.id.button);
 
-        logOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainActivity.this, Resgister.class));
-            }
-        });
     }
+
+
 
 }

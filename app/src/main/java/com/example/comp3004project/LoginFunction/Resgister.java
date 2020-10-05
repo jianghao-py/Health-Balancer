@@ -40,7 +40,7 @@ public class Resgister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resgister);
 
-        inputUsername = (EditText) findViewById(R.id.editTextTextPersonName);
+
         inputEmail = (EditText) findViewById(R.id.editTextTextPersonName2);
         inputPassword = (EditText) findViewById(R.id.editTextTextPersonName3);
         signUpButton = (Button) findViewById(R.id.button2);
@@ -52,12 +52,7 @@ public class Resgister extends AppCompatActivity {
             public void onClick(View view) {
                 String emailInput = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
-                final String username= inputUsername.getText().toString().trim();
 
-                if(TextUtils.isEmpty(username)){
-                    Toast.makeText(getApplicationContext(),"Username is Empty!",Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
                 if(TextUtils.isEmpty(emailInput)){
                     Toast.makeText(getApplicationContext(),"Email is Empty!",Toast.LENGTH_SHORT).show();
