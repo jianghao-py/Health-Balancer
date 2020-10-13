@@ -18,4 +18,15 @@
     <string name="Notification_textView" />
     <string name="Notification_Logout">Log Out</string>
     <string name="Home_textView" />
+    <string name="PersonalFile_Name">Name:</string>
+    <string name="PersonalFile_ChangeNameButton">Set Name</string>
+    <string name="ResetPasswordButton">Reset Password</string>
+    <string name="DeleteAccountButton">Delete This Account</string>
+    <string name="SetNameActicityEditText" />
+    <string name="SetNameActivityEditHint">Enter your Name</string>
+    <string name="SetNameActivityButton">Set Name</string>
+    <string name="PersonalFileTitle">Personal File</string>
+    <string name="GoToPersonalFileButton">Check Personal File</string>
+    <string name="textView_ReturnPage">Return Previous Page</string>
+
 </resources>

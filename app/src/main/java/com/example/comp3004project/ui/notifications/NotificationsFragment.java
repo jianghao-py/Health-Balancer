@@ -18,37 +18,23 @@ import com.example.comp3004project.LoginFunction.Resgister;
 import com.example.comp3004project.MainActivity;
 import com.example.comp3004project.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 
 public class NotificationsFragment extends Fragment {
 
     private NotificationsViewModel notificationsViewModel;
-    Button logoutButton;
-    TextView textViewTitle;
+    Button logoutButton,goPersonalFileButton;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        /*
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(NotificationsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
-        //初始化控件
-        textViewTitle = root.findViewById(R.id.textView);
-        logoutButton = root.findViewById(R.id.button6);
-
-        notificationsViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textViewTitle.setText(s);
-            }
-        });
-
-         return root;
-          */
 
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        textViewTitle = root.findViewById(R.id.textView);
 
         logoutButton = root.findViewById(R.id.button6);
+        goPersonalFileButton = root.findViewById(R.id.button13);
+
 
 
         return root;
@@ -64,11 +50,11 @@ public class NotificationsFragment extends Fragment {
         notificationsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textViewTitle.setText(s);
+
             }
         });
 
-
+        //Logout Function
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,5 +62,19 @@ public class NotificationsFragment extends Fragment {
                 startActivity(new Intent(getActivity(), Resgister.class));
             }
         });
+
+        goPersonalFileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), PersonalFileActivity.class));
+            }
+        });
+
+
+
+
+
     }
+
+
 }
