@@ -1,41 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/button_info"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:background="@android:color/holo_orange_light"
+        android:text="@string/Notification_Logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/Setting"
-        android:layout_width="match_parent"
-        android:layout_height="79dp"
-        android:text="@string/setting"
-        android:textSize="36sp" />
-
-    <Switch
-        android:id="@+id/button_notify"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:text="@string/notifications"
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/common_google_signin_btn_tint"
+        android:text="@string/GoToPersonalFileButton"
         android:textSize="18sp"
-        android:background="@drawable/button_border"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:text="@string/information"
-        android:gravity="center_vertical"
-        android:background="@drawable/button_border" />
-
-    <Button
-        android:id="@+id/logout"
-        android:text="@string/logout"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/button_border"/>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
