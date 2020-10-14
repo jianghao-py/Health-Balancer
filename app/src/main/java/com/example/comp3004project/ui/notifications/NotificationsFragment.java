@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -15,11 +14,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.comp3004project.LoginFunction.Resgister;
-import com.example.comp3004project.MainActivity;
 import com.example.comp3004project.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 
 public class NotificationsFragment extends Fragment {
 
@@ -32,8 +28,8 @@ public class NotificationsFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
-        logoutButton = root.findViewById(R.id.button6);
-        goPersonalFileButton = root.findViewById(R.id.button13);
+        logoutButton = root.findViewById(R.id.notif_logout);
+        goPersonalFileButton = root.findViewById(R.id.person_info);
 
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.comp3004project">
 
     <application
@@ -11,9 +12,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".LoginFunction.Login"></activity>
         <activity android:name=".ui.dashboard.CreateEventActivity" />
+        <activity android:name=".ui.dashboard.NewEventActivity" />
         <activity android:name=".ui.notifications.PersonalFileActivity" />
         <activity android:name=".ui.notifications.SetNameActivity" />
-        <activity android:name=".LoginFunction.Login" />
         <activity android:name=".LoginFunction.Resgister">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
