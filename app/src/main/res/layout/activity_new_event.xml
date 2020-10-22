@@ -76,16 +76,14 @@
         android:layout_width="258dp"
         android:layout_height="140dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/description_shape"
+        android:background="@drawable/button_border"
         android:drawablePadding="5dp"
-        android:inputType="textPersonName"
         android:hint="text something..."
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/food_description"
-        tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="452dp" />
+        app:layout_constraintTop_toBottomOf="@+id/food_description" />
 
     <Button
         android:id="@+id/submit_event"

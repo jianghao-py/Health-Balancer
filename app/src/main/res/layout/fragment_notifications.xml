@@ -22,7 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
-        android:background="@drawable/description_shape"
+        android:background="@color/common_google_signin_btn_text_dark_disabled"
         android:text="@string/GoToPersonalFileButton"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

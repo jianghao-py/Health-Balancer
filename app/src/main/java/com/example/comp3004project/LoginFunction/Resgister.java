@@ -18,12 +18,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Resgister extends AppCompatActivity {
-    private EditText inputEmail,inputPassword,inputUsername;
+    private EditText inputEmail,inputPassword;
     private Button signUpButton,goLoginButton;
 
+//数据库变量声明
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mFirebaseDatabaseInstance;
+
     private FirebaseAuth mAuth;
+
+    String userId;
+    String emailAddress;
 
     @Override
     protected void onStart() {
@@ -46,7 +56,11 @@ public class Resgister extends AppCompatActivity {
         signUpButton = (Button) findViewById(R.id.button2);
         goLoginButton = (Button) findViewById(R.id.button3);
 
+        //获取firebase数据库身份验证和实时数据库
         mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +109,17 @@ public class Resgister extends AppCompatActivity {
                             Toast.makeText(Resgister.this,"SignUp Fail"+task.getException(),Toast.LENGTH_LONG).show();
                             Log.e("MyTag",task.getException().toString());
                         }else {
+                            mFirebaseDatabaseInstance = mFirebaseDatabase.getReference();
+                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+                            userId = firebaseUser.getUid();
+                            emailAddress=firebaseUser.getEmail();
+
+                            User myUser = new User(userId,emailAddress);
+
+                            mFirebaseDatabaseInstance.child("users").child(userId).setValue(myUser);
+
+
                             startActivity(new Intent(Resgister.this,MainActivity.class));
                             finish();
                         }
