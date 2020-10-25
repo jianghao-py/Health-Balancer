@@ -18,23 +18,40 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class PersonalFileActivity extends AppCompatActivity {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    Button setNameButton,changePasswordButton,returnButton;
-    TextView userNameTextView;
+    String uid = user.getUid();
+    DatabaseReference myRef;
+
+    Button setNameButton,changePasswordButton,returnButton,setAgeButton,setGenderButton,setWeightAndHeightButton;
+    TextView userNameTextView,genderTextView,ageTextView,heightTextView,weightTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_file);
 
-
+        //Buttons
         setNameButton = findViewById(R.id.button10);
         changePasswordButton = findViewById(R.id.button11);
-       // deleteAccountButton = findViewById(R.id.button12);
-        userNameTextView = findViewById(R.id.textView5);
         returnButton = findViewById(R.id.button);
+        setAgeButton = findViewById(R.id.button6);
+        setGenderButton = findViewById(R.id.button4);
+        setWeightAndHeightButton = findViewById(R.id.button8);
+        //TextViews
+        userNameTextView = findViewById(R.id.textView5);
+        genderTextView = findViewById(R.id.textView3);
+        ageTextView = findViewById(R.id.textView6);
+        heightTextView = findViewById(R.id.textView8);
+        weightTextView = findViewById(R.id.textView7);
 
         //Set Name Button (Go to Change Name page)
         setNameButton.setOnClickListener(new View.OnClickListener() {
@@ -57,26 +74,6 @@ public class PersonalFileActivity extends AppCompatActivity {
         //get User name
         getFireBaseUserName();
 
-        /*
-        //DeleteAccount
-        deleteAccountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                user.delete()
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(getApplicationContext(),"This Account Deleted",Toast.LENGTH_LONG).show();
-                                    FirebaseAuth.getInstance().signOut();
-                                }
-                            }
-                        });
-            }
-        });
-
-         */
 
         //go ResetPasswordActivity
         changePasswordButton.setOnClickListener(new View.OnClickListener() {
@@ -86,16 +83,118 @@ public class PersonalFileActivity extends AppCompatActivity {
             }
         });
 
+        //go setAge
+        setAgeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PersonalFileActivity.this, SetAgeActivity.class));
+            }
+        });
+
+        //go setGender
+        setGenderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PersonalFileActivity.this, SetGenderActivity.class));
+
+            }
+        });
+
+        //go setWeightAndHeight
+        setWeightAndHeightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PersonalFileActivity.this, SetWeightAndHeight.class));
+
+            }
+        });
+
+        getDatabaseHeight();
+        getDatabaseWeight();
+        getDatabaseAge();
+        getDatabaseGender();
+
 
 }
+
 
 
     public void getFireBaseUserName(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         for(UserInfo profile : user.getProviderData()) {
             String name = profile.getDisplayName();
-            userNameTextView.setText(name);
+            userNameTextView.setText("Name："+name);
 
         }
     }
+
+    public void getDatabaseHeight(){
+
+        myRef = database.getReference("users").child(uid).child("Height");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                heightTextView.setText("Height: "+value +" CM");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void getDatabaseWeight(){
+        myRef = database.getReference("users").child(uid).child("Weight");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                weightTextView.setText("Weight: "+value+" KG");
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void getDatabaseAge(){
+        myRef = database.getReference("users").child(uid).child("Age");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                ageTextView.setText("Age: "+value);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void getDatabaseGender(){
+        myRef = database.getReference("users").child(uid).child("Gender");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                genderTextView.setText("Gender: "+value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 }

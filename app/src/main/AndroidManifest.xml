@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginFunction.Login"></activity>
+        <activity android:name=".ui.notifications.SetGenderActivity"></activity>
+        <activity android:name=".ui.notifications.SetAgeActivity" />
+        <activity android:name=".ui.notifications.SetWeightAndHeight" />
+        <activity android:name=".LoginFunction.Login" />
         <activity android:name=".ui.dashboard.CreateEventActivity" />
         <activity android:name=".ui.dashboard.NewEventActivity" />
         <activity android:name=".ui.notifications.PersonalFileActivity" />
@@ -24,7 +27,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
     </application>
 
 </manifest>
