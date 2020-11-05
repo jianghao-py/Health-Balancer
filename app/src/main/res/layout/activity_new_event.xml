@@ -7,95 +7,59 @@
     tools:context=".ui.dashboard.NewEventActivity">
 
     <TextView
-        android:id="@+id/food_description"
-        android:layout_width="127dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="266dp"
-        android:text="description"
-        android:textSize="24sp"
+        android:id="@+id/PickTypeTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Select Type of Event"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/spinner"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/food_calories" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/food_calories"
-        android:layout_width="98dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="56dp"
-        android:text="@string/calories"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/input_carlories"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/food_name" />
-
-    <TextView
-        android:id="@+id/food_name"
-        android:layout_width="68dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginBottom="56dp"
-        android:text="Name"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/food_calories"
-        app:layout_constraintEnd_toStartOf="@+id/input_foodName"
+        android:id="@+id/PickDateTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:text="Select Date"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDate"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/input_foodName"
+        android:id="@+id/editTextDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="96dp"
-        android:layout_marginBottom="54dp"
+        android:layout_marginTop="128dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/food_calories"
+        android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/food_name"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/input_carlories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="84dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_foodName" />
-
-    <EditText
-        android:id="@+id/input_description"
-        android:layout_width="258dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_border"
-        android:drawablePadding="5dp"
-        android:hint="text something..."
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/food_description" />
 
     <Button
-        android:id="@+id/submit_event"
-        android:layout_width="wrap_content"
+        android:id="@+id/GoNextPage"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="submit"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="236dp"
+        android:background="@android:color/holo_orange_light"
+        android:text="Go Next Page"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_description" />
-
-
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,7 +23,7 @@ public class DashboardFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
+
 
         create_button = root.findViewById(R.id.button_create);
         update_button = root.findViewById(R.id.button_delete);
@@ -38,7 +38,7 @@ public class DashboardFragment extends Fragment {
         create_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+
                 startActivity(new Intent(getActivity(), CreateEventActivity.class));
             }
         });

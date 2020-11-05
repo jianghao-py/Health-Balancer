@@ -7,10 +7,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.comp3004project.LoginFunction.Resgister;
+import com.example.comp3004project.MainActivity;
 import com.example.comp3004project.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,66 +29,122 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 public class NewEventActivity extends AppCompatActivity {
 
-    private Button submit_button;
-    private TextView food_name, calories, description;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
-    DatabaseReference test = database.getReference("test");
-    private static final String TAG = "NewEventActivity";
+    List<String>data = null;
+    ArrayAdapter<String> adapter;
+
+    Button goNextPage;
+    Spinner spinner;
+    EditText inputDate;
+
+    String getSpinner;
+    String saveSelect;
+    String saveDate;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
-        myRef.setValue("Hello, World!");
-        submit_button = (Button) findViewById(R.id.submit_event);
-        food_name = (TextView) findViewById(R.id.input_foodName);
-        calories = (TextView) findViewById(R.id.input_carlories);
-        description = (TextView) findViewById(R.id.input_description);
-//        rootNode = FirebaseDatabase.getInstance();
-//        reference = rootNode.getReference().child("hello");
-//
-//        reference.setValue("dum");
 
-//        submit_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-//                Date date = new Date();
-//                String time = formatter.format(date);
-//                System.out.println(food_name.getText().toString() + "\n" + calories.getText().toString() + "\n" + description.getText().toString());
-//                HelperNewEvent new_event = new HelperNewEvent(food_name.toString(), calories.toString(), description.toString());
-////                reference.setValue("dum");
-//
-//
-//            }
-//        });
-    }
-    @Override
-    protected void onStart(){
-        super.onStart();
-        myRef.addValueEventListener(new ValueEventListener() {
+
+        spinner = findViewById(R.id.spinner);
+        goNextPage = findViewById(R.id.GoNextPage);
+        inputDate = findViewById(R.id.editTextDate);
+
+        spinner.setPrompt("Select:");
+        data = new ArrayList<String>();
+        data.add("Breakfast");
+        data.add("Lunch");
+        data.add("Dinner");
+        data.add("WorkOut");
+
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,this.data);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] types = data.toArray(new String[data.size()]);
+                Toast.makeText(NewEventActivity.this,types[position],Toast.LENGTH_LONG).show();
+                getSpinner = types[position];
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+        goNextPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveDate = inputDate.getText().toString();
+                if (getSpinner == "WorkOut"){
+                    Intent i = new Intent(NewEventActivity.this, WorkOutActivity.class);
+                    i.putExtra("Select",getSpinner);
+                    i.putExtra("Date",saveDate);
+                    startActivity(i);
+                    //startActivity(new Intent(NewEventActivity.this, WorkOutActivity.class));
+                }
+                else {
+                    Intent i = new Intent(NewEventActivity.this, FoodEventActivity.class);
+                    i.putExtra("Select",getSpinner);
+                    i.putExtra("Date",saveDate);
+                    startActivity(i);
+                    //startActivity(new Intent(NewEventActivity.this, FoodEventActivity.class));
+                }
+            }
+
+        });
+
+
+
+
+    }
+
+    /*
+    private  void saveDataInFirebase(){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+
+        DatabaseReference rootReference = firebaseDatabase.getReference();
+
+       // DatabaseReference uidReference = rootReference.child("users").child(currentUser.getUid());
+       // uidReference.setValue("Events");
+
+        DatabaseReference eventReference = rootReference.child("users").child(currentUser.getUid()).child("Events");
+
+       DatabaseReference newEventReference = eventReference.push();
+
+        HelperNewEvent newEvent = new HelperNewEvent(getSpinner);
+
+      newEventReference.setValue(newEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(NewEventActivity.this,"Event submitted in Firebase",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(NewEventActivity.this,"Event could not submit in Firebase",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
+     */
 
 }
+
+
