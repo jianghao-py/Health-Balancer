@@ -30,4 +30,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Switch
+        android:id="@+id/notify"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Notify"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/person_info" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
