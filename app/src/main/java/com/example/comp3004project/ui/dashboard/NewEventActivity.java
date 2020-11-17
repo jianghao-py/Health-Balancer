@@ -41,11 +41,10 @@ public class NewEventActivity extends AppCompatActivity {
 
     Button goNextPage;
     Spinner spinner;
-    EditText inputDate;
 
     String getSpinner;
-    String saveSelect;
-    String saveDate;
+   // String saveSelect;
+
 
 
 
@@ -58,7 +57,7 @@ public class NewEventActivity extends AppCompatActivity {
 
         spinner = findViewById(R.id.spinner);
         goNextPage = findViewById(R.id.GoNextPage);
-        inputDate = findViewById(R.id.editTextDate);
+
 
         spinner.setPrompt("Select:");
         data = new ArrayList<String>();
@@ -89,20 +88,18 @@ public class NewEventActivity extends AppCompatActivity {
         goNextPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveDate = inputDate.getText().toString();
+
                 if (getSpinner == "WorkOut"){
                     Intent i = new Intent(NewEventActivity.this, WorkOutActivity.class);
                     i.putExtra("Select",getSpinner);
-                    i.putExtra("Date",saveDate);
                     startActivity(i);
-                    //startActivity(new Intent(NewEventActivity.this, WorkOutActivity.class));
+
                 }
                 else {
                     Intent i = new Intent(NewEventActivity.this, FoodEventActivity.class);
                     i.putExtra("Select",getSpinner);
-                    i.putExtra("Date",saveDate);
                     startActivity(i);
-                    //startActivity(new Intent(NewEventActivity.this, FoodEventActivity.class));
+
                 }
             }
 
