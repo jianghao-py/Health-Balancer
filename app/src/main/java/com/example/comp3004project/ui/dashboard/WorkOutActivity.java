@@ -3,11 +3,14 @@ package com.example.comp3004project.ui.dashboard;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.comp3004project.R;
@@ -18,11 +21,23 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class WorkOutActivity extends AppCompatActivity {
     EditText inputWorkOut,inputWorkOutCalories;
-    Button saveEvent;
+    Button saveEvent,setDate;
     String getDate,getSelect,workOutString,workOutCalorieString;
     private WorkOutActivity myContext;
+    TextView showDate;
+
+
+    Calendar calendar = Calendar.getInstance();
+    Locale ca = new Locale("en","CA");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMMM-YYYY",ca);
+    Date date;
 
 
     @Override
@@ -33,10 +48,31 @@ public class WorkOutActivity extends AppCompatActivity {
         inputWorkOut = findViewById(R.id.editTextWork);
         inputWorkOutCalories = findViewById(R.id.editTextWorkCalories);
         saveEvent = findViewById(R.id.button16);
+        setDate = findViewById(R.id.button19);
+        showDate = findViewById(R.id.textView21);
 
         Intent intent = getIntent();
-        getDate = intent.getStringExtra("Date");
         getSelect = intent.getStringExtra("Select");
+
+        setDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(myContext, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        calendar.set(year,month,dayOfMonth);
+                        showDate.setText(simpleDateFormat.format(calendar.getTime()));
+                        date = calendar.getTime();
+                    }
+                },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+            }
+        });
+
+
+
+
+
 
         saveEvent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +86,9 @@ public class WorkOutActivity extends AppCompatActivity {
         myContext = this;
     }
 
+
+
+
     private  void saveDataInFirebase(){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -62,7 +101,7 @@ public class WorkOutActivity extends AppCompatActivity {
 
         DatabaseReference newEventReference = eventReference.push();
 
-        HelperNewEvent newEvent = new HelperNewEvent(getSelect,getDate,workOutString,workOutCalorieString);
+        HelperNewEvent newEvent = new HelperNewEvent(getSelect,date.getTime(),workOutString,workOutCalorieString);
 
         newEventReference.setValue(newEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -77,4 +116,6 @@ public class WorkOutActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
