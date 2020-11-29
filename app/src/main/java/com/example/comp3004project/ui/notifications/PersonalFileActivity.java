@@ -11,8 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.comp3004project.LoginFunction.Resgister;
+import com.example.comp3004project.LoginFunction.User;
 import com.example.comp3004project.MainActivity;
 import com.example.comp3004project.R;
+import com.example.comp3004project.ui.dashboard.HelperNewEvent;
+import com.example.comp3004project.ui.home.WorkOutAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,8 +34,8 @@ public class PersonalFileActivity extends AppCompatActivity {
     String uid = user.getUid();
     DatabaseReference myRef;
 
-    Button setNameButton,changePasswordButton,returnButton,setAgeButton,setGenderButton,setWeightAndHeightButton;
-    TextView userNameTextView,genderTextView,ageTextView,heightTextView,weightTextView;
+    Button setNameButton, changePasswordButton, returnButton, setAgeButton, setGenderButton, setWeightAndHeightButton;
+    TextView userNameTextView, genderTextView, ageTextView, heightTextView, weightTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +46,8 @@ public class PersonalFileActivity extends AppCompatActivity {
         setNameButton = findViewById(R.id.button10);
         changePasswordButton = findViewById(R.id.button11);
         returnButton = findViewById(R.id.button);
-        setAgeButton = findViewById(R.id.button6);
         setGenderButton = findViewById(R.id.button4);
-        setWeightAndHeightButton = findViewById(R.id.button8);
+
         //TextViews
         userNameTextView = findViewById(R.id.textView5);
         genderTextView = findViewById(R.id.textView3);
@@ -83,13 +85,6 @@ public class PersonalFileActivity extends AppCompatActivity {
             }
         });
 
-        //go setAge
-        setAgeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(PersonalFileActivity.this, SetAgeActivity.class));
-            }
-        });
 
         //go setGender
         setGenderButton.setOnClickListener(new View.OnClickListener() {
@@ -100,42 +95,34 @@ public class PersonalFileActivity extends AppCompatActivity {
             }
         });
 
-        //go setWeightAndHeight
-        setWeightAndHeightButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(PersonalFileActivity.this, SetWeightAndHeight.class));
 
-            }
-        });
 
-        getDatabaseHeight();
         getDatabaseWeight();
-        getDatabaseAge();
         getDatabaseGender();
+        getDatabaseAge();
+        getDatabaseHeight();
 
 
-}
+    }
 
 
-
-    public void getFireBaseUserName(){
+    public void getFireBaseUserName() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        for(UserInfo profile : user.getProviderData()) {
+        for (UserInfo profile : user.getProviderData()) {
             String name = profile.getDisplayName();
-            userNameTextView.setText("Name："+name);
+            userNameTextView.setText("Name：" + name);
 
         }
     }
 
-    public void getDatabaseHeight(){
+    public void getDatabaseHeight() {
 
-        myRef = database.getReference("users").child(uid).child("Height");
+        myRef = database.getReference("users").child(uid).child("Personal").child("height");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                heightTextView.setText("Height: "+value +" CM");
+                heightTextView.setText("Height: " + value + " CM");
             }
 
             @Override
@@ -145,13 +132,13 @@ public class PersonalFileActivity extends AppCompatActivity {
         });
     }
 
-    public void getDatabaseWeight(){
-        myRef = database.getReference("users").child(uid).child("Weight");
+    public void getDatabaseWeight() {
+        myRef = database.getReference("users").child(uid).child("Personal").child("weight");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                weightTextView.setText("Weight: "+value+" KG");
+                weightTextView.setText("Weight: " + value + " KG");
 
             }
 
@@ -162,13 +149,13 @@ public class PersonalFileActivity extends AppCompatActivity {
         });
     }
 
-    public void getDatabaseAge(){
-        myRef = database.getReference("users").child(uid).child("Age");
+    public void getDatabaseAge() {
+        myRef = database.getReference("users").child(uid).child("Personal").child("age");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                ageTextView.setText("Age: "+value);
+                ageTextView.setText("Age: " + value);
 
             }
 
@@ -180,13 +167,13 @@ public class PersonalFileActivity extends AppCompatActivity {
 
     }
 
-    public void getDatabaseGender(){
-        myRef = database.getReference("users").child(uid).child("Gender");
+    public void getDatabaseGender() {
+        myRef = database.getReference("users").child(uid).child("Personal").child("gender");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                genderTextView.setText("Gender: "+value);
+                genderTextView.setText("Gender: " + value);
             }
 
             @Override
@@ -195,6 +182,9 @@ public class PersonalFileActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 
 
 }

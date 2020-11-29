@@ -18,7 +18,7 @@ import com.example.comp3004project.R;
 
 public class DashboardFragment extends Fragment {
 
-    private Button create_button, update_button, delete_button;
+    private Button create_button, update_button, delete_button,viewSuggestion;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -28,6 +28,7 @@ public class DashboardFragment extends Fragment {
         create_button = root.findViewById(R.id.button_create);
         update_button = root.findViewById(R.id.button_delete);
         delete_button = root.findViewById(R.id.button_delete);
+        viewSuggestion = root.findViewById(R.id.button_Suggestion);
 
         return root;
     }
@@ -40,6 +41,14 @@ public class DashboardFragment extends Fragment {
             public void onClick(View v) {
 
                 startActivity(new Intent(getActivity(), CreateEventActivity.class));
+            }
+        });
+
+
+        viewSuggestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),CaloriesSuggestion.class));
             }
         });
 
