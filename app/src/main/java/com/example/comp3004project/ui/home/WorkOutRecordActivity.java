@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.comp3004project.R;
+import com.example.comp3004project.ui.dashboard.HelpWorkOut;
 import com.example.comp3004project.ui.dashboard.HelperNewEvent;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,11 +34,11 @@ import java.util.Locale;
 
 public class WorkOutRecordActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    ArrayList<HelperNewEvent> eventArrayList = new ArrayList<>();
+    ArrayList<HelpWorkOut> eventArrayList = new ArrayList<>();
     WorkOutAdapter workOutAdapter;
     Context myContext;
     TextView showStartDate,showEndDate;
-    Button setStartDate,setEndDate,searchDate;
+    Button setStartDate,setEndDate,searchDate,showAll;
 
     Date startDate,endDate;
     Calendar calendar = Calendar.getInstance();
@@ -63,6 +64,7 @@ public class WorkOutRecordActivity extends AppCompatActivity {
         setStartDate = findViewById(R.id.setStartDateWorkOut);
         setEndDate = findViewById(R.id.setEndDateWorkOut);
         searchDate = findViewById(R.id.searchDateWorkOut);
+        showAll = findViewById(R.id.button20);
 
         searchDate.setEnabled(false);
 
@@ -135,7 +137,7 @@ public class WorkOutRecordActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         eventArrayList.clear();
                         for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
-                            HelperNewEvent events = eventSnapshot.getValue(HelperNewEvent.class);
+                            HelpWorkOut events = eventSnapshot.getValue(HelpWorkOut.class);
 
                             eventArrayList.add(events);
 
@@ -156,7 +158,12 @@ public class WorkOutRecordActivity extends AppCompatActivity {
             }
         });
 
-        // readEventFromFireBase();
+        showAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readEventFromFireBase();
+            }
+        });
 
 
 
@@ -175,9 +182,9 @@ public class WorkOutRecordActivity extends AppCompatActivity {
         eventReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                HelperNewEvent events;
+                HelpWorkOut events;
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
-                    events = eventSnapshot.getValue(HelperNewEvent.class);
+                    events = eventSnapshot.getValue(HelpWorkOut.class);
 
                     eventArrayList.add(events);
 

@@ -29,7 +29,7 @@ import java.util.Locale;
 public class WorkOutActivity extends AppCompatActivity {
     EditText inputWorkOut,inputWorkOutCalories;
     Button saveEvent,setDate;
-    String getDate,getSelect,workOutString,workOutCalorieString;
+    String getSelect,workOutString,workOutCalorieString;
     private WorkOutActivity myContext;
     TextView showDate;
 
@@ -101,9 +101,10 @@ public class WorkOutActivity extends AppCompatActivity {
 
         DatabaseReference newEventReference = eventReference.push();
 
-        HelperNewEvent newEvent = new HelperNewEvent(getSelect,date.getTime(),workOutString,workOutCalorieString);
+        //HelperNewEvent newEvent = new HelperNewEvent(getSelect,date.getTime(),workOutString,workOutCalorieString);
+        HelpWorkOut helpWorkOut = new HelpWorkOut(getSelect,date.getTime(),workOutString,Integer.parseInt(workOutCalorieString));
 
-        newEventReference.setValue(newEvent).addOnCompleteListener(new OnCompleteListener<Void>() {
+        newEventReference.setValue(helpWorkOut).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){

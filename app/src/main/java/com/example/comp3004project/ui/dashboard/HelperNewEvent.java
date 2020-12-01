@@ -1,8 +1,8 @@
 package com.example.comp3004project.ui.dashboard;
 
 public class HelperNewEvent {
-   private  String type,mainFood,drink,mainFoodCalorie,drinkCalorie,workOut,workOutCalorie;
-
+   private  String type,mainFood,drink,workOut,workOutCalorie;
+   int mainFoodCaloriesInt,drinkCaloriesInt;
    long date;
 
 
@@ -10,15 +10,16 @@ public class HelperNewEvent {
     public HelperNewEvent() {
     }
 
-    public HelperNewEvent(String type,long date,String mainFood,String drink,String mainFoodCalorie,String drinkCalorie ) {
+    public HelperNewEvent(String type,long date,String mainFood,String drink,int mainFoodCaloriesInt,int drinkCaloriesInt) {
         this.date = date;
         this.type = type;
         this.mainFood = mainFood;
         this.drink = drink;
-        this.drinkCalorie =drinkCalorie;
-        this.mainFoodCalorie = mainFoodCalorie;
+        this.mainFoodCaloriesInt = mainFoodCaloriesInt;
+        this.drinkCaloriesInt = drinkCaloriesInt;
     }
 
+    /*
     public HelperNewEvent(String type, long date, String workOut, String workOutCalorie){
         this.date =date;
         this.type = type;
@@ -26,6 +27,26 @@ public class HelperNewEvent {
         this.workOutCalorie = workOutCalorie;
     }
 
+     */
+
+
+    public int getDrinkCaloriesInt() {
+        return drinkCaloriesInt;
+    }
+
+    public void setDrinkCaloriesInt(int drinkCaloriesInt) {
+        this.drinkCaloriesInt = drinkCaloriesInt;
+    }
+
+    public int getMainFoodCaloriesInt() {
+        return mainFoodCaloriesInt;
+    }
+
+    public void setMainFoodCaloriesInt(int mainFoodCaloriesInt) {
+        this.mainFoodCaloriesInt = mainFoodCaloriesInt;
+    }
+
+    /*
     public String getWorkOut() {
         return workOut;
     }
@@ -42,8 +63,10 @@ public class HelperNewEvent {
         this.workOut = workOut;
     }
 
+     */
 
 
+/*
     public String getMainFoodCalorie() {
         return mainFoodCalorie;
     }
@@ -59,6 +82,8 @@ public class HelperNewEvent {
     public void setDrinkCalorie(String drinkCalorie) {
         this.drinkCalorie = drinkCalorie;
     }
+
+ */
 
     public String getMainFood() {
         return mainFood;

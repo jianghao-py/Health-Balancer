@@ -33,6 +33,7 @@ public class FoodEventActivity extends AppCompatActivity {
     TextView showDate;
     String getSelect,mainFoodString,drinkString,mainFoodCalorieString,drinkCalorieString;
     private FoodEventActivity myContext;
+    //int mainFoodCaloriesInt,drinkCaloriesInt;
 
 
     Calendar calendar = Calendar.getInstance();
@@ -111,7 +112,7 @@ public class FoodEventActivity extends AppCompatActivity {
 
 
 
-        HelperNewEvent newEvent = new HelperNewEvent(getSelect,date.getTime(),mainFoodString,drinkString,mainFoodCalorieString,drinkCalorieString);
+        HelperNewEvent newEvent = new HelperNewEvent(getSelect,date.getTime(),mainFoodString,drinkString,Integer.parseInt(mainFoodCalorieString),Integer.parseInt(drinkCalorieString));
 
 
         newEventReference.setValue(newEvent).addOnCompleteListener(new OnCompleteListener<Void>() {

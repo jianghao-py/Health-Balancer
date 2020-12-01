@@ -111,7 +111,7 @@ public class FoodCalories extends AppCompatActivity {
                 Query query = eventReference.orderByChild("date").startAt(startDate.getTime()).endAt(endDate.getTime());
 
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
-                   // ArrayList<HelperNewEvent> helperNewEvents = new ArrayList<>();
+
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         HelperNewEvent events = null;
@@ -122,15 +122,16 @@ public class FoodCalories extends AppCompatActivity {
 
                         for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
                              events = eventSnapshot.getValue(HelperNewEvent.class);
-                             drinkTotalInt += events.getDrinkCalorie();
-                             mainTotalInt += events.getMainFoodCalorie();
+                             drinkTotalInt += events.getDrinkCaloriesInt();
+                             mainTotalInt += events.getMainFoodCaloriesInt();
 
 
 
 
                         }
-                        totalInt = drinkTotalInt +mainTotalInt;
-                        show.setText(String.valueOf(totalInt));
+                       totalInt = drinkTotalInt +mainTotalInt;
+                        String total = Integer.toString(totalInt);
+                       show.setText("Based on the record you created, your total calories intake from "+showStartDate.getText().toString()+ " to "+ showEndDate.getText().toString()+ " is: " + total);
                     }
 
                     @Override

@@ -37,7 +37,7 @@ public class RecordActivity extends AppCompatActivity {
     EventAdapter eventAdapter;
     Context myContext;
     TextView showStartDate,showEndDate;
-    Button setStartDate,setEndDate,searchDate;
+    Button setStartDate,setEndDate,searchDate,showAll;
 
     Date startDate,endDate;
     Calendar calendar = Calendar.getInstance();
@@ -60,6 +60,7 @@ public class RecordActivity extends AppCompatActivity {
         setStartDate = findViewById(R.id.foodStartDateButton);
         setEndDate = findViewById(R.id.foodEndDateButton);
         searchDate = findViewById(R.id.foodSearchButton);
+        showAll = findViewById(R.id.button6);
 
         searchDate.setEnabled(false);
         setStartDate.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +147,14 @@ public class RecordActivity extends AppCompatActivity {
             }
         });
 
-       // readEventFromFireBase();
+
+        showAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readEventFromFireBase();
+            }
+        });
+
 
 
 

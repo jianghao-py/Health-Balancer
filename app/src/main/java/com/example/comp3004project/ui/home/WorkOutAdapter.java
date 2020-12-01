@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.comp3004project.R;
+import com.example.comp3004project.ui.dashboard.HelpWorkOut;
 import com.example.comp3004project.ui.dashboard.HelperNewEvent;
 
 import java.text.SimpleDateFormat;
@@ -18,12 +19,13 @@ import java.util.Locale;
 
 public class WorkOutAdapter extends RecyclerView.Adapter<WorkOutAdapter.ViewHolder> {
 
-    private final ArrayList<HelperNewEvent> eventsList;
+    //private final ArrayList<HelperNewEvent> eventsList;
+    private  final  ArrayList<HelpWorkOut> eventsList;
     private final Context myContext;
     Locale ca = new Locale("en","CA");
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMMM-YYYY",ca);
 
-    public WorkOutAdapter(ArrayList<HelperNewEvent> eventsList,Context myContext){
+    public WorkOutAdapter(ArrayList<HelpWorkOut> eventsList,Context myContext){
         this.eventsList = eventsList;
         this.myContext = myContext;
 
@@ -59,7 +61,7 @@ public class WorkOutAdapter extends RecyclerView.Adapter<WorkOutAdapter.ViewHold
         holder.type.setText(eventsList.get(position).getType());
         holder.date.setText(simpleDateFormat.format(eventsList.get(position).getDate()));
         holder.workOut.setText(eventsList.get(position).getWorkOut());
-        holder.workOutCalories.setText(eventsList.get(position).getWorkOutCalorie());
+        holder.workOutCalories.setText(String.valueOf(eventsList.get(position).getWorkOutCalories()));
 
 
     }

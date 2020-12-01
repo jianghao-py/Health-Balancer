@@ -64,9 +64,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.date.setText(simpleDateFormat.format(eventsList.get(position).getDate()));
         //holder.date.setText(eventsList.get(position).getDate());
         holder.mainFood.setText(eventsList.get(position).getMainFood());
-        holder.mainFoodCalories.setText(eventsList.get(position).getMainFoodCalorie());
+        holder.mainFoodCalories.setText(String.valueOf(eventsList.get(position).getMainFoodCaloriesInt()));
         holder.drink.setText(eventsList.get(position).getDrink());
-        holder.drinkCalories.setText(eventsList.get(position).getDrinkCalorie());
+        holder.drinkCalories.setText(String.valueOf(eventsList.get(position).getDrinkCaloriesInt()));
 
     }
 
