@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.dashboard.CaloriesSuggestion"></activity>
+        <activity android:name=".ui.home.FoodCalories"></activity>
+        <activity android:name=".ui.dashboard.CaloriesSuggestion" />
         <activity android:name=".ui.home.WorkOutRecordActivity" />
         <activity android:name=".ui.dashboard.WorkOutActivity" />
         <activity android:name=".ui.dashboard.FoodEventActivity" />

@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -23,9 +25,9 @@ import java.util.ArrayList;
 
 public class CaloriesSuggestion extends AppCompatActivity {
 
-    TextView calorieSuggestion,showAge,showGender,showHeight,showWeight;
-    RadioGroup genderSelection,exerciseSelection;
-
+    TextView calorieSuggestion,showBMR,finalSuggestion;
+    RadioGroup genderSelection,exerciseSelection,keepOrLose;
+    Button saveData;
 
 
 
@@ -39,6 +41,10 @@ public class CaloriesSuggestion extends AppCompatActivity {
         calorieSuggestion = findViewById(R.id.CaloriesSuggestion);
         genderSelection  = findViewById(R.id.genderSelection);
         exerciseSelection = findViewById(R.id.exerciseSelection);
+        showBMR = findViewById(R.id.BMR);
+        keepOrLose = findViewById(R.id.keepOrLose);
+        finalSuggestion = findViewById(R.id.textView37);
+        saveData = findViewById(R.id.saveSuggestion);
 
 
         final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -49,7 +55,8 @@ public class CaloriesSuggestion extends AppCompatActivity {
         personalReference.addValueEventListener(new ValueEventListener() {
             int age,height,weight;
             double BMR;
-            double Calories;
+            int Calories;
+            int finalCalories;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<String> userArrayList = new ArrayList<>();
@@ -63,59 +70,279 @@ public class CaloriesSuggestion extends AppCompatActivity {
                 age = Integer.parseInt(ageString);
                 height = Integer.parseInt(heightString);
                 weight = Integer.parseInt(weightString);
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                DatabaseReference rootReference = firebaseDatabase.getReference();
+                final DatabaseReference personalReference = rootReference.child("users").child(currentUser.getUid()).child("CaloriesSuggestion");
+
 
                 genderSelection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         if(checkedId == R.id.radioButton2){
                             BMR = 66.47 + (13.7 * weight) + (5* height) - (6.8 * age);
+                            int BMRInt = (int) BMR;
+                            String BMRString = String.valueOf(BMRInt);
+                            showBMR.setText(BMRString);
                             exerciseSelection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                                 @Override
                                 public void onCheckedChanged(RadioGroup group, int checkedId) {
                                     if(checkedId == R.id.radioButton3){
-                                        Calories = BMR * 1.2;
+                                        Calories = (int) (BMR * 1.2);
                                         String CaloriesString = String.valueOf(Calories);
                                         calorieSuggestion.setText(CaloriesString);
+                                        keepOrLose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                                            @Override
+                                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                                if (checkedId == R.id.radioButton7){
+                                                    finalCalories = Calories;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+
+                                                }else {
+                                                    finalCalories = Calories - 300;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        });
                                     }else if(checkedId == R.id.radioButton4){
-                                        Calories = BMR * 1.375;
+                                        Calories = (int) (BMR * 1.375);
                                         String CaloriesString = String.valueOf(Calories);
                                         calorieSuggestion.setText(CaloriesString);
+                                        keepOrLose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                                            @Override
+                                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                                if (checkedId == R.id.radioButton7){
+                                                    finalCalories = Calories;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }else {
+                                                    finalCalories = Calories - 300;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        });
 
                                     }else if(checkedId == R.id.radioButton5){
-                                        Calories = BMR * 1.55;
+                                       Calories =(int) (BMR * 1.55);
                                         String CaloriesString = String.valueOf(Calories);
                                         calorieSuggestion.setText(CaloriesString);
+                                        keepOrLose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                                            @Override
+                                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                                if (checkedId == R.id.radioButton7){
+                                                    finalCalories = Calories;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }else {
+                                                    finalCalories = Calories - 300;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        });
 
                                     }else {
-                                        Calories = BMR * 1.725;
+                                       Calories =(int) (BMR * 1.725);
                                         String CaloriesString = String.valueOf(Calories);
                                         calorieSuggestion.setText(CaloriesString);
+                                        keepOrLose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                                            @Override
+                                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                                if (checkedId == R.id.radioButton7){
+                                                    finalCalories = Calories;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }else {
+                                                    finalCalories = Calories - 300;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        });
                                     }
                                 }
                             });
                         }else {
                             BMR = 655.1 + (9.6 * weight) + (1.8 *height) - (4.7 * age);
+                            int BMRInt = (int) BMR;
+                            String BMRString = String.valueOf(BMRInt);
+                            showBMR.setText(BMRString);
                             exerciseSelection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                                 @Override
                                 public void onCheckedChanged(RadioGroup group, int checkedId) {
                                     if(checkedId == R.id.radioButton3){
-                                        Calories = BMR * 1.2;
+                                        Calories = (int) (BMR * 1.2);
                                         String CaloriesString = String.valueOf(Calories);
                                         calorieSuggestion.setText(CaloriesString);
+                                        keepOrLose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                                            @Override
+                                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                                if (checkedId == R.id.radioButton7){
+                                                    finalCalories = Calories;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }else {
+                                                    finalCalories = Calories - 300;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        });
                                     }else if(checkedId == R.id.radioButton4){
-                                        Calories = BMR * 1.375;
+                                        Calories = (int) (BMR * 1.375);
                                         String CaloriesString = String.valueOf(Calories);
                                         calorieSuggestion.setText(CaloriesString);
+                                        keepOrLose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                                            @Override
+                                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                                if (checkedId == R.id.radioButton7){
+                                                    finalCalories = Calories;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }else {
+                                                    finalCalories = Calories - 300;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        });
 
                                     }else if(checkedId == R.id.radioButton5){
-                                        Calories = BMR * 1.55;
+                                        Calories =(int) (BMR * 1.55);
                                         String CaloriesString = String.valueOf(Calories);
                                         calorieSuggestion.setText(CaloriesString);
+                                        keepOrLose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                                            @Override
+                                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                                if (checkedId == R.id.radioButton7){
+                                                    finalCalories = Calories;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }else {
+                                                    finalCalories = Calories - 300;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        });
 
                                     }else {
-                                        Calories = BMR * 1.725;
+                                        Calories = (int) (BMR * 1.725);
                                         String CaloriesString = String.valueOf(Calories);
                                         calorieSuggestion.setText(CaloriesString);
+                                        keepOrLose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                                            @Override
+                                            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                                                if (checkedId == R.id.radioButton7){
+                                                    finalCalories = Calories;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }else {
+                                                    finalCalories = Calories - 300;
+                                                    finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
+                                                    final String finalCaloriesString = String.valueOf(finalCalories);
+                                                    saveData.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            personalReference.setValue(finalCaloriesString);
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        });
                                     }
                                 }
                             });
@@ -133,6 +360,8 @@ public class CaloriesSuggestion extends AppCompatActivity {
 
             }
         });
+
+
 
 
 
@@ -179,13 +408,6 @@ public class CaloriesSuggestion extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-
-
-    }
 
 
 
@@ -248,24 +470,5 @@ public class CaloriesSuggestion extends AppCompatActivity {
         });
 
 
-
-    }
-
-    public void getDatabaseGender(){
-        myRef = database.getReference("users").child(uid).child("Gender");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                showGender.setText(value);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-
- */
+*/
 }

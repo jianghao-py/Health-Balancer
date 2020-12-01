@@ -66,12 +66,8 @@ public class SetGenderActivity extends AppCompatActivity {
 
     private  void saveDataInFirebase() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-
         DatabaseReference rootReference = firebaseDatabase.getReference();
-
-
         DatabaseReference personalReference = rootReference.child("users").child(currentUser.getUid()).child("Personal");
 
         if(maleCheckBox.isChecked()){
