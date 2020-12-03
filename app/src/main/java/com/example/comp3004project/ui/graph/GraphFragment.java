@@ -335,93 +335,93 @@ public class GraphFragment extends Fragment {
         return renderer;
     }
 
-    private XYMultipleSeriesRenderer buildRenderer(int[] colors, PointStyle[] styles) {
-        XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
-        setRenderer(renderer, colors, styles);
-        return renderer;
-    }
-
-    private void setRenderer(XYMultipleSeriesRenderer renderer, int[] colors, PointStyle[] styles) {
-        renderer.setAxisTitleTextSize(20);//x,y抽标题大小
-        renderer.setChartTitleTextSize(20);//标题大小
-        renderer.setLabelsTextSize(20);//Labels大小
-        renderer.setLegendTextSize(20);//图例大小
-
-        renderer.setPointSize(8f);//点的大小
-        renderer.setMargins(new int[] { 20, 42, 35, 20 });//控制你图的边距  实现跟图例的分离上,左,下,右
-
-
-        int length = colors.length;
-        for (int i = 0; i < length; i++) {
-            XYSeriesRenderer r = new XYSeriesRenderer();
-            r.setColor(colors[i]);
-            r.setPointStyle(styles[i]);
-            renderer.addSeriesRenderer(r);
-        }
-    }
-
-    private void setChartSettings(XYMultipleSeriesRenderer renderer, String title, String xTitle, String yTitle, double xMin, double xMax, double yMin, double yMax, int axesColor, int labelsColor) {
-        renderer.setChartTitle(title);//总标题
-        renderer.setXTitle(xTitle);//x轴标题
-        renderer.setYTitle(yTitle);//y轴标题
-        renderer.setXAxisMin(xMin);//x数轴上限
-        renderer.setXAxisMax(xMax);//数轴下限
-        renderer.setYAxisMin(yMin);
-        renderer.setYAxisMax(yMax);
-        renderer.setAxesColor(axesColor);
-        renderer.setLabelsColor(labelsColor);
-    }
-
-    private XYMultipleSeriesDataset buildDataset(String[] titles, List<double[]> xValues, List<double[]> yValues) {
-        XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-        addXYSeries(dataset, titles, xValues, yValues, 0);
-        return dataset;
-    }
-
-    protected XYMultipleSeriesDataset buildBarDataset(String[] titles, List<double[]> values) {
-        XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-        int length = titles.length;
-        for (int i = 0; i < length; i++) {
-            CategorySeries series = new CategorySeries(titles[i]);
-            double[] v = values.get(i);
-            int seriesLength = v.length;
-            for (int k = 0; k < seriesLength; k++) {
-                series.add(v[k]);
-            }
-            dataset.addSeries(series.toXYSeries());
-        }
-        return dataset;
-    }
-
-    private void addXYSeries(XYMultipleSeriesDataset dataset, String[] titles, List<double[]> xValues, List<double[]> yValues, int scale) {
-        int length = titles.length;
-
-        for (int i = 0; i < length; i++) {
-
-            XYSeries series = new XYSeries(titles[i], scale);
-            double[] xV = xValues.get(i);
-            double[] yV = yValues.get(i);
-            int seriesLength = xV.length;
-            for (int k = 0; k < seriesLength; k++) {
-                series.add(xV[k], yV[k]);
-            }
-            dataset.addSeries(series);
-        }
-    }
-
-    protected XYMultipleSeriesRenderer buildBarRenderer(int[] colors) {
-        XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
-        renderer.setAxisTitleTextSize(16);
-        renderer.setChartTitleTextSize(20);
-        renderer.setLabelsTextSize(15);
-        renderer.setLegendTextSize(15);
-        int length = colors.length;
-        for (int i = 0; i < length; i++) {
-            SimpleSeriesRenderer r = new SimpleSeriesRenderer();
-            r.setColor(colors[i]);
-            renderer.addSeriesRenderer(r);
-        }
-        return renderer;
-    }
-
+//    private XYMultipleSeriesRenderer buildRenderer(int[] colors, PointStyle[] styles) {
+//        XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
+//        setRenderer(renderer, colors, styles);
+//        return renderer;
+//    }
+//
+//    private void setRenderer(XYMultipleSeriesRenderer renderer, int[] colors, PointStyle[] styles) {
+//        renderer.setAxisTitleTextSize(20);//x,y抽标题大小
+//        renderer.setChartTitleTextSize(20);//标题大小
+//        renderer.setLabelsTextSize(20);//Labels大小
+//        renderer.setLegendTextSize(20);//图例大小
+//
+//        renderer.setPointSize(8f);//点的大小
+//        renderer.setMargins(new int[] { 20, 42, 35, 20 });//控制你图的边距  实现跟图例的分离上,左,下,右
+//
+//
+//        int length = colors.length;
+//        for (int i = 0; i < length; i++) {
+//            XYSeriesRenderer r = new XYSeriesRenderer();
+//            r.setColor(colors[i]);
+//            r.setPointStyle(styles[i]);
+//            renderer.addSeriesRenderer(r);
+//        }
+//    }
+//
+//    private void setChartSettings(XYMultipleSeriesRenderer renderer, String title, String xTitle, String yTitle, double xMin, double xMax, double yMin, double yMax, int axesColor, int labelsColor) {
+//        renderer.setChartTitle(title);//总标题
+//        renderer.setXTitle(xTitle);//x轴标题
+//        renderer.setYTitle(yTitle);//y轴标题
+//        renderer.setXAxisMin(xMin);//x数轴上限
+//        renderer.setXAxisMax(xMax);//数轴下限
+//        renderer.setYAxisMin(yMin);
+//        renderer.setYAxisMax(yMax);
+//        renderer.setAxesColor(axesColor);
+//        renderer.setLabelsColor(labelsColor);
+//    }
+//
+//    private XYMultipleSeriesDataset buildDataset(String[] titles, List<double[]> xValues, List<double[]> yValues) {
+//        XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
+//        addXYSeries(dataset, titles, xValues, yValues, 0);
+//        return dataset;
+//    }
+//
+//    protected XYMultipleSeriesDataset buildBarDataset(String[] titles, List<double[]> values) {
+//        XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
+//        int length = titles.length;
+//        for (int i = 0; i < length; i++) {
+//            CategorySeries series = new CategorySeries(titles[i]);
+//            double[] v = values.get(i);
+//            int seriesLength = v.length;
+//            for (int k = 0; k < seriesLength; k++) {
+//                series.add(v[k]);
+//            }
+//            dataset.addSeries(series.toXYSeries());
+//        }
+//        return dataset;
+//    }
+//
+//    private void addXYSeries(XYMultipleSeriesDataset dataset, String[] titles, List<double[]> xValues, List<double[]> yValues, int scale) {
+//        int length = titles.length;
+//
+//        for (int i = 0; i < length; i++) {
+//
+//            XYSeries series = new XYSeries(titles[i], scale);
+//            double[] xV = xValues.get(i);
+//            double[] yV = yValues.get(i);
+//            int seriesLength = xV.length;
+//            for (int k = 0; k < seriesLength; k++) {
+//                series.add(xV[k], yV[k]);
+//            }
+//            dataset.addSeries(series);
+//        }
+//    }
+//
+//    protected XYMultipleSeriesRenderer buildBarRenderer(int[] colors) {
+//        XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
+//        renderer.setAxisTitleTextSize(16);
+//        renderer.setChartTitleTextSize(20);
+//        renderer.setLabelsTextSize(15);
+//        renderer.setLegendTextSize(15);
+//        int length = colors.length;
+//        for (int i = 0; i < length; i++) {
+//            SimpleSeriesRenderer r = new SimpleSeriesRenderer();
+//            r.setColor(colors[i]);
+//            renderer.addSeriesRenderer(r);
+//        }
+//        return renderer;
+//    }
+//
 }
