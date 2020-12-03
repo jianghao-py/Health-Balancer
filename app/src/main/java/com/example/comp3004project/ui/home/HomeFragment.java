@@ -26,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
-    Button goFoodRecord,goWorkOutRecord,goFoodCaloires;
+    Button goFoodRecord,goWorkOutRecord,goFoodCalories,goWorkOutCalories;
 
 
 
@@ -38,7 +38,8 @@ public class HomeFragment extends Fragment {
 
         goFoodRecord = root.findViewById(R.id.button2);
         goWorkOutRecord = root.findViewById(R.id.button17);
-        goFoodCaloires = root.findViewById(R.id.button8);
+        goFoodCalories = root.findViewById(R.id.button8);
+        goWorkOutCalories = root.findViewById(R.id.button25);
 
 
 
@@ -69,10 +70,17 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        goFoodCaloires.setOnClickListener(new View.OnClickListener() {
+        goFoodCalories.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), FoodCalories.class));
+            }
+        });
+
+        goWorkOutCalories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), WokrOutCalories.class));
             }
         });
 

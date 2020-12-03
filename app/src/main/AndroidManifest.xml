@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.comp3004project">
-
+    <uses-permission android:name="android.permission.INTERNET "></uses-permission>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.home.FoodCalories"></activity>
+        <activity android:name=".ui.dashboard.SearchFood"></activity>
+        <activity android:name=".ui.home.WokrOutCalories" />
+        <activity android:name=".ui.home.FoodCalories" />
         <activity android:name=".ui.dashboard.CaloriesSuggestion" />
         <activity android:name=".ui.home.WorkOutRecordActivity" />
         <activity android:name=".ui.dashboard.WorkOutActivity" />

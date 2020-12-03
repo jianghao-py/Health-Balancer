@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.comp3004project.R;
+import com.example.comp3004project.ui.dashboard.HelpWorkOut;
 import com.example.comp3004project.ui.dashboard.HelperNewEvent;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,12 +25,11 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class FoodCalories extends AppCompatActivity {
+public class WokrOutCalories extends AppCompatActivity {
     Context myContext;
     TextView showStartDate,showEndDate,show;
     Button setStartDate,setEndDate,searchDate;
@@ -39,18 +39,19 @@ public class FoodCalories extends AppCompatActivity {
     Locale ca = new Locale("en","CA");
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMMM-YYYY",ca);
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_food_calories);
+        setContentView(R.layout.activity_wokr_out_calories);
 
         myContext = this;
-        showStartDate = findViewById(R.id.textView30);
-        showEndDate = findViewById(R.id.textView31);
-        setStartDate = findViewById(R.id.button12);
-        setEndDate = findViewById(R.id.button13);
-        show = findViewById(R.id.textView32);
-        searchDate = findViewById(R.id.button14);
+        showStartDate = findViewById(R.id.textView34);
+        showEndDate = findViewById(R.id.textView35);
+        setStartDate = findViewById(R.id.button21);
+        setEndDate = findViewById(R.id.button22);
+        searchDate = findViewById(R.id.button23);
+        show = findViewById(R.id.textView38);
 
         searchDate.setEnabled(false);
         setStartDate.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +76,6 @@ public class FoodCalories extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-
 
         setEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,32 +106,27 @@ public class FoodCalories extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                DatabaseReference eventReference = firebaseDatabase.getReference().child("users").child(currentUser.getUid()).child("Events").child("Food");
+                DatabaseReference eventReference = firebaseDatabase.getReference().child("users").child(currentUser.getUid()).child("Events").child("WorkOut");
 
                 Query query = eventReference.orderByChild("date").startAt(startDate.getTime()).endAt(endDate.getTime());
 
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
-                   // ArrayList<HelperNewEvent> helperNewEvents = new ArrayList<>();
+                    // ArrayList<HelperNewEvent> helperNewEvents = new ArrayList<>();
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        HelperNewEvent events = null;
+                       HelpWorkOut events = null;
 
-                        int drinkTotalInt = 0;
-                        int mainTotalInt = 0;
+                        int workOutTotalInt = 0;
                         int totalInt = 0;
-
                         for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
-                             events = eventSnapshot.getValue(HelperNewEvent.class);
-                             drinkTotalInt += events.getDrinkCaloriesInt();
-                             mainTotalInt += events.getMainFoodCaloriesInt();
-
-
+                            events = eventSnapshot.getValue(HelpWorkOut.class);
+                            workOutTotalInt+= events.getWorkOutCalories();
 
 
                         }
-                       totalInt = drinkTotalInt +mainTotalInt;
+                        totalInt = workOutTotalInt;
                         String total = Integer.toString(totalInt);
-                       show.setText("Based on the records you created, your total calories intake from "+showStartDate.getText().toString()+ " to "+ showEndDate.getText().toString()+ " is: " + total);
+                        show.setText("Based on the records you created, your total calories cost from "+showStartDate.getText().toString()+ " to "+ showEndDate.getText().toString()+ " is: " + total);
                     }
 
                     @Override
@@ -145,9 +140,6 @@ public class FoodCalories extends AppCompatActivity {
                 }
             }
         });
-
-
-
 
     }
 }

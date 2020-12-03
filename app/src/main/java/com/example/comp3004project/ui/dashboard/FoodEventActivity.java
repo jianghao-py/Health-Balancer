@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.comp3004project.LoginFunction.Login;
+import com.example.comp3004project.MainActivity;
 import com.example.comp3004project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,11 +31,11 @@ import java.util.Locale;
 
 public class FoodEventActivity extends AppCompatActivity {
     EditText inputMainFood, inputMainFoodCalorie, inputDrink,inputDrinkCalorie;
-    Button saveEvent,setDate;
+    Button saveEvent,setDate,goSearchFood;
     TextView showDate;
     String getSelect,mainFoodString,drinkString,mainFoodCalorieString,drinkCalorieString;
     private FoodEventActivity myContext;
-    //int mainFoodCaloriesInt,drinkCaloriesInt;
+
 
 
     Calendar calendar = Calendar.getInstance();
@@ -56,6 +58,7 @@ public class FoodEventActivity extends AppCompatActivity {
 
         setDate = findViewById(R.id.button18);
         showDate = findViewById(R.id.textView2);
+        goSearchFood = findViewById(R.id.button24);
 
 
         Intent intent = getIntent();
@@ -76,6 +79,13 @@ public class FoodEventActivity extends AppCompatActivity {
                     }
                 },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
                 datePickerDialog.show();
+            }
+        });
+
+        goSearchFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FoodEventActivity.this, SearchFood.class));
             }
         });
 
