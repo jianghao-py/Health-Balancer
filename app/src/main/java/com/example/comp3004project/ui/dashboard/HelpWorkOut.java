@@ -1,10 +1,15 @@
 package com.example.comp3004project.ui.dashboard;
 
+import com.google.firebase.database.Exclude;
+
 public class HelpWorkOut {
 
     private  String type, workOut;
     long date;
     int workOutCalories;
+
+    @Exclude
+    String recordId;
 
     public  HelpWorkOut(){
 
@@ -16,6 +21,15 @@ public class HelpWorkOut {
         this.workOut = workOut;
         this.workOutCalories = workOutCalories;
 
+    }
+
+    @Exclude
+    public String getRecordId() {
+        return recordId;
+    }
+    @Exclude
+    public void setRecordId(String recordId) {
+        this.recordId = recordId;
     }
 
     public long getDate() {

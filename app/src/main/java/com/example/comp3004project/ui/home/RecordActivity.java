@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.comp3004project.R;
 import com.example.comp3004project.ui.dashboard.HelperNewEvent;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,7 +40,7 @@ public class RecordActivity extends AppCompatActivity {
     EventAdapter eventAdapter;
     Context myContext;
     TextView showStartDate,showEndDate;
-    Button setStartDate,setEndDate,searchDate,showAll;
+    Button setStartDate,setEndDate,searchDate,showAll,refreshPage;
 
     Date startDate,endDate;
     Calendar calendar = Calendar.getInstance();
@@ -61,6 +64,7 @@ public class RecordActivity extends AppCompatActivity {
         setEndDate = findViewById(R.id.foodEndDateButton);
         searchDate = findViewById(R.id.foodSearchButton);
         showAll = findViewById(R.id.button6);
+        refreshPage = findViewById(R.id.button27);
 
         searchDate.setEnabled(false);
         setStartDate.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +131,7 @@ public class RecordActivity extends AppCompatActivity {
                         eventArrayList.clear();
                         for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
                             HelperNewEvent events = eventSnapshot.getValue(HelperNewEvent.class);
+                            events.setRecordId(eventSnapshot.getKey());
 
                             eventArrayList.add(events);
 
@@ -155,16 +160,28 @@ public class RecordActivity extends AppCompatActivity {
             }
         });
 
+        refreshPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setRefreshPage();
+            }
+        });
+
 
 
 
     }
 
+    private void setRefreshPage(){
+        finish();
+        startActivity( new Intent(this, RecordActivity.class));
+
+    }
+
+
     private  void readEventFromFireBase(){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-
-
         DatabaseReference eventReference = firebaseDatabase.getReference().child("users").child(currentUser.getUid()).child("Events").child("Food");
 
         eventReference.addValueEventListener(new ValueEventListener() {
@@ -173,6 +190,7 @@ public class RecordActivity extends AppCompatActivity {
 
                 for (DataSnapshot eventSnapshot : dataSnapshot.getChildren()) {
                     HelperNewEvent events = eventSnapshot.getValue(HelperNewEvent.class);
+                    events.setRecordId(eventSnapshot.getKey());
 
                     eventArrayList.add(events);
 
@@ -189,6 +207,26 @@ public class RecordActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void  deleteFromFirebase(String recordID){
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference eventReference = firebaseDatabase.getReference().child("users").child(currentUser.getUid()).child("Events").child("Food");
+        DatabaseReference findRecord = eventReference.child(recordID);
+
+        findRecord.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(myContext,"Delete Successfully",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(myContext,"Delete Failed",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
     }
 }

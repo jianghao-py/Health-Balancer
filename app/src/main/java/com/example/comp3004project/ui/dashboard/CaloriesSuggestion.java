@@ -27,7 +27,7 @@ public class CaloriesSuggestion extends AppCompatActivity {
 
     TextView calorieSuggestion,showBMR,finalSuggestion;
     RadioGroup genderSelection,exerciseSelection,keepOrLose;
-    Button saveData;
+    //Button saveData;
 
 
 
@@ -44,7 +44,7 @@ public class CaloriesSuggestion extends AppCompatActivity {
         showBMR = findViewById(R.id.BMR);
         keepOrLose = findViewById(R.id.keepOrLose);
         finalSuggestion = findViewById(R.id.textView37);
-        saveData = findViewById(R.id.saveSuggestion);
+
 
 
         final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -70,10 +70,6 @@ public class CaloriesSuggestion extends AppCompatActivity {
                 age = Integer.parseInt(ageString);
                 height = Integer.parseInt(heightString);
                 weight = Integer.parseInt(weightString);
-                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                DatabaseReference rootReference = firebaseDatabase.getReference();
-                final DatabaseReference personalReference = rootReference.child("users").child(currentUser.getUid()).child("CaloriesSuggestion");
 
 
                 genderSelection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -97,24 +93,12 @@ public class CaloriesSuggestion extends AppCompatActivity {
                                                 if (checkedId == R.id.radioButton7){
                                                     finalCalories = Calories;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
 
                                                 }else {
                                                     finalCalories = Calories - 300;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }
                                             }
                                         });
@@ -128,23 +112,11 @@ public class CaloriesSuggestion extends AppCompatActivity {
                                                 if (checkedId == R.id.radioButton7){
                                                     finalCalories = Calories;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }else {
                                                     finalCalories = Calories - 300;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }
                                             }
                                         });
@@ -159,23 +131,11 @@ public class CaloriesSuggestion extends AppCompatActivity {
                                                 if (checkedId == R.id.radioButton7){
                                                     finalCalories = Calories;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }else {
                                                     finalCalories = Calories - 300;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }
                                             }
                                         });
@@ -190,23 +150,11 @@ public class CaloriesSuggestion extends AppCompatActivity {
                                                 if (checkedId == R.id.radioButton7){
                                                     finalCalories = Calories;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }else {
                                                     finalCalories = Calories - 300;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }
                                             }
                                         });
@@ -231,23 +179,11 @@ public class CaloriesSuggestion extends AppCompatActivity {
                                                 if (checkedId == R.id.radioButton7){
                                                     finalCalories = Calories;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }else {
                                                     finalCalories = Calories - 300;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }
                                             }
                                         });
@@ -261,23 +197,11 @@ public class CaloriesSuggestion extends AppCompatActivity {
                                                 if (checkedId == R.id.radioButton7){
                                                     finalCalories = Calories;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }else {
                                                     finalCalories = Calories - 300;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }
                                             }
                                         });
@@ -292,23 +216,11 @@ public class CaloriesSuggestion extends AppCompatActivity {
                                                 if (checkedId == R.id.radioButton7){
                                                     finalCalories = Calories;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }else {
                                                     finalCalories = Calories - 300;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }
                                             }
                                         });
@@ -323,23 +235,11 @@ public class CaloriesSuggestion extends AppCompatActivity {
                                                 if (checkedId == R.id.radioButton7){
                                                     finalCalories = Calories;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }else {
                                                     finalCalories = Calories - 300;
                                                     finalSuggestion.setText("Calories Intake Suggestion: "+finalCalories);
-                                                    final String finalCaloriesString = String.valueOf(finalCalories);
-                                                    saveData.setOnClickListener(new View.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(View v) {
-                                                            personalReference.setValue(finalCaloriesString);
-                                                        }
-                                                    });
+
                                                 }
                                             }
                                         });

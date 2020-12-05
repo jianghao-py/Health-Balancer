@@ -44,7 +44,6 @@ public class PersonalFileActivity extends AppCompatActivity {
 
         //Buttons
         setNameButton = findViewById(R.id.button10);
-        changePasswordButton = findViewById(R.id.button11);
         returnButton = findViewById(R.id.button);
         setGenderButton = findViewById(R.id.button4);
 
@@ -77,13 +76,7 @@ public class PersonalFileActivity extends AppCompatActivity {
         getFireBaseUserName();
 
 
-        //go ResetPasswordActivity
-        changePasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(PersonalFileActivity.this, ResetPasswordActivity.class));
-            }
-        });
+
 
 
         //go setGender

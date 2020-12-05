@@ -14,13 +14,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
+        app:layout_constraintTop_toBottomOf="@+id/button27" />
 
     <TextView
         android:id="@+id/seclectStartDateFood"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/foodStartDateButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +32,7 @@
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
+        android:background="@android:color/holo_orange_light"
         android:text="Select Start Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +40,8 @@
     <Button
         android:id="@+id/foodSearchButton"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="35dp"
+        android:background="@android:color/holo_orange_light"
         android:text="Search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -57,6 +60,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/foodEndDateButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,6 +71,7 @@
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
+        android:background="@android:color/holo_orange_light"
         android:text="Select End Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/foodStartDateButton" />
@@ -74,11 +79,24 @@
     <Button
         android:id="@+id/button6"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_orange_light"
         android:text="Show All Records"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/foodSearchButton" />
+
+    <Button
+        android:id="@+id/button27"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/cardview_shadow_end_color"
+        android:text="Refresh this page"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

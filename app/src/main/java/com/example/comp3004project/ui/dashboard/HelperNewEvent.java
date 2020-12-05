@@ -1,11 +1,14 @@
 package com.example.comp3004project.ui.dashboard;
 
+import com.google.firebase.database.Exclude;
+
 public class HelperNewEvent {
    private  String type,mainFood,drink,workOut,workOutCalorie;
    int mainFoodCaloriesInt,drinkCaloriesInt;
    long date;
 
-
+ @Exclude
+ String recordId;
 
     public HelperNewEvent() {
     }
@@ -29,6 +32,14 @@ public class HelperNewEvent {
 
      */
 
+    @Exclude
+    public String getRecordId() {
+        return recordId;
+    }
+    @Exclude
+    public void setRecordId(String recordId) {
+        this.recordId = recordId;
+    }
 
     public int getDrinkCaloriesInt() {
         return drinkCaloriesInt;

@@ -29,9 +29,10 @@ import java.util.Locale;
 public class WorkOutActivity extends AppCompatActivity {
     EditText inputWorkOut,inputWorkOutCalories;
     Button saveEvent,setDate;
-    String getSelect,workOutString,workOutCalorieString;
+    String getSelect,workOutString,workOutCalorieString,getDate;
     private WorkOutActivity myContext;
     TextView showDate;
+    int workOutCaloriesInt;
 
 
     Calendar calendar = Calendar.getInstance();
@@ -79,7 +80,24 @@ public class WorkOutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 workOutString = inputWorkOut.getText().toString();
                 workOutCalorieString = inputWorkOutCalories.getText().toString();
-                saveDataInFirebase();
+                getDate = showDate.getText().toString();
+                if(workOutCalorieString.isEmpty()){
+                    workOutCaloriesInt = 0;
+                }else {
+                    workOutCaloriesInt = Integer.parseInt(workOutCalorieString);
+                }
+
+
+                if(getDate.isEmpty()){
+                    Toast.makeText(myContext,"Please enter all data before save",Toast.LENGTH_SHORT).show();
+                }else {
+                    saveDataInFirebase();
+                }
+
+
+
+
+
             }
         });
 
@@ -102,7 +120,7 @@ public class WorkOutActivity extends AppCompatActivity {
         DatabaseReference newEventReference = eventReference.push();
 
         //HelperNewEvent newEvent = new HelperNewEvent(getSelect,date.getTime(),workOutString,workOutCalorieString);
-        HelpWorkOut helpWorkOut = new HelpWorkOut(getSelect,date.getTime(),workOutString,Integer.parseInt(workOutCalorieString));
+        HelpWorkOut helpWorkOut = new HelpWorkOut(getSelect,date.getTime(),workOutString,workOutCaloriesInt);
 
         newEventReference.setValue(helpWorkOut).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

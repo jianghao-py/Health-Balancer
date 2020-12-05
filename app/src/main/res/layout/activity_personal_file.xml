@@ -49,6 +49,7 @@
         android:id="@+id/button10"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@android:color/holo_orange_light"
         android:text="@string/SetNameActivityButton"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,19 +63,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.17910448" />
-
-    <Button
-        android:id="@+id/button11"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="88dp"
-        android:background="@color/common_google_signin_btn_tint"
-        android:text="@string/ResetPasswordButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button"
@@ -104,7 +92,9 @@
         android:id="@+id/button4"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/cardview_shadow_end_color"
         android:text="Edit Your information"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline3"

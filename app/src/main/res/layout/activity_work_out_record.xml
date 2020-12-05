@@ -14,13 +14,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button20" />
+        app:layout_constraintTop_toBottomOf="@+id/button26" />
 
     <TextView
         android:id="@+id/showStartDateWorkOut"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/setStartDateWorkOut"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +32,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/setEndDateWorkOut"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,8 +41,9 @@
     <Button
         android:id="@+id/setStartDateWorkOut"
         android:layout_width="150dp"
-        android:layout_height="40dp"
+        android:layout_height="35dp"
         android:layout_marginTop="16dp"
+        android:background="@android:color/holo_orange_light"
         android:text="Set Start Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,8 +51,9 @@
     <Button
         android:id="@+id/setEndDateWorkOut"
         android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/holo_orange_light"
         android:text="Set End Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setStartDateWorkOut" />
@@ -57,7 +61,8 @@
     <Button
         android:id="@+id/searchDateWorkOut"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="35dp"
+        android:background="@android:color/holo_orange_light"
         android:text="Search Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -74,10 +79,23 @@
     <Button
         android:id="@+id/button20"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_orange_light"
         android:text="Show All records"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchDateWorkOut" />
+
+    <Button
+        android:id="@+id/button26"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:text="Refresh this page"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button20" />
 </androidx.constraintlayout.widget.ConstraintLayout>

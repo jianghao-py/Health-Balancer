@@ -30,7 +30,7 @@ public class DashboardFragment extends Fragment {
     DatabaseReference checkReference = firebaseDatabase.getReference().child("users").child(currentUser.getUid());
 
 
-    private Button create_button, update_button, delete_button,viewSuggestion;
+    private Button create_button,viewSuggestion;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -38,8 +38,6 @@ public class DashboardFragment extends Fragment {
 
 
         create_button = root.findViewById(R.id.button_create);
-        update_button = root.findViewById(R.id.button_delete);
-        delete_button = root.findViewById(R.id.button_delete);
         viewSuggestion = root.findViewById(R.id.button_Suggestion);
 
         return root;

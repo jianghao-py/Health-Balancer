@@ -262,15 +262,17 @@ public class GraphFragment extends Fragment {
                         }
                         totalInt = drinkTotalInt +mainTotalInt;
                         String total = Integer.toString(totalInt);
-//                        show.setText("Based on the records you created, your total calories intake from "+showStartDate.getText().toString()+ " to "+ showEndDate.getText().toString()+ " is: " + total);
+//                      show.setText("Based on the records you created, your total calories intake from "+showStartDate.getText().toString()+ " to "+ showEndDate.getText().toString()+ " is: " + total);
                         show.setText(total);
-                        double v1;
+                        double v1,v2,v3;
+                        v2 = Double.valueOf(drinkTotalInt);
+                        v3 = Double.valueOf(mainTotalInt);
                         if(show.getText().toString().isEmpty())
                             v1 = 1;
                         else
                             v1= Double.valueOf(show.getText().toString());
-                        double[] values_1 = {v1,0,0,2};
-                        CategorySeries dataset_1=buildCategoryDataset("测试饼图", values_1);
+                        double[] values_1 = {v1,v2,v3,30};
+                        CategorySeries dataset_1=buildCategoryDataset("Graph", values_1);
                         int[] colors_1 ={Color.BLUE,Color.GREEN,Color.MAGENTA,Color.RED};
                         DefaultRenderer renderer_1=buildCategoryRenderer(colors_1);
                         System.out.println(renderer_1);
@@ -292,7 +294,7 @@ public class GraphFragment extends Fragment {
             }
         });
         double[] values_1 = {1,2,3,4};
-        CategorySeries dataset_1=buildCategoryDataset("测试饼图", values_1);
+        CategorySeries dataset_1=buildCategoryDataset("Graph", values_1);
         int[] colors_1 ={Color.BLUE,Color.GREEN,Color.MAGENTA,Color.RED};
         DefaultRenderer renderer_1=buildCategoryRenderer(colors_1);
         System.out.println(renderer_1);
@@ -306,22 +308,22 @@ public class GraphFragment extends Fragment {
 
     protected CategorySeries buildCategoryDataset(String title, double[] values) {
         CategorySeries series = new CategorySeries(title);
-        series.add("Total Caloires", values[0]);
-        series.add("不达标", values[1]);
-        series.add("达标", values[2]);
-        series.add("优秀",values[3]);
+        series.add("Total(drink,food)", values[0]);
+        series.add("Drink", values[1]);
+        series.add("Food", values[2]);
+        series.add("Work Out",values[3]);
         return series;
     }
 
     protected DefaultRenderer buildCategoryRenderer(int[] colors) {
         DefaultRenderer renderer = new DefaultRenderer();
-        renderer.setLegendTextSize(20);//设置左下角表注的文字大小
+        renderer.setLegendTextSize(25);//设置左下角表注的文字大小
         //renderer.setZoomButtonsVisible(true);//设置显示放大缩小按钮
         renderer.setZoomEnabled(false);//设置不允许放大缩小.
-        renderer.setChartTitleTextSize(30);//设置图表标题的文字大小
-        renderer.setChartTitle("统计结果");//设置图表的标题  默认是居中顶部显示
-        renderer.setLabelsTextSize(20);//饼图上标记文字的字体大小
-        //renderer.setLabelsColor(Color.WHITE);//饼图上标记文字的颜色
+        // renderer.setChartTitleTextSize(30);//设置图表标题的文字大小
+        //  renderer.setChartTitle("统计结果");//设置图表的标题  默认是居中顶部显示
+        renderer.setLabelsTextSize(25);//饼图上标记文字的字体大小
+        renderer.setLabelsColor(Color.BLACK);//饼图上标记文字的颜色
         renderer.setPanEnabled(false);//设置是否可以平移
         //renderer.setDisplayValues(true);//是否显示值
         renderer.setClickEnabled(true);//设置是否可以被点击

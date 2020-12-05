@@ -33,8 +33,9 @@ public class FoodEventActivity extends AppCompatActivity {
     EditText inputMainFood, inputMainFoodCalorie, inputDrink,inputDrinkCalorie;
     Button saveEvent,setDate,goSearchFood;
     TextView showDate;
-    String getSelect,mainFoodString,drinkString,mainFoodCalorieString,drinkCalorieString;
+    String getSelect,mainFoodString,drinkString,mainFoodCalorieString,drinkCalorieString,getDate;
     private FoodEventActivity myContext;
+    int mainFoodInt,drinkInt;
 
 
 
@@ -63,8 +64,6 @@ public class FoodEventActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         getSelect = intent.getStringExtra("Select");
-
-
 
 
         setDate.setOnClickListener(new View.OnClickListener() {
@@ -98,9 +97,18 @@ public class FoodEventActivity extends AppCompatActivity {
                 drinkString = inputDrink.getText().toString();
                 mainFoodCalorieString = inputMainFoodCalorie.getText().toString();
                 drinkCalorieString = inputDrinkCalorie.getText().toString();
+                getDate = showDate.getText().toString();
 
 
-                saveDataInFirebase();
+
+
+                if(getDate.isEmpty()){
+                    Toast.makeText(myContext,"Please enter all data before save",Toast.LENGTH_SHORT).show();
+                }else {
+                    saveDataInFirebase();
+                }
+
+
             }
         });
 

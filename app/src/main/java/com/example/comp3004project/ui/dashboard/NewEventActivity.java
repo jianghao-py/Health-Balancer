@@ -73,7 +73,7 @@ public class NewEventActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String[] types = data.toArray(new String[data.size()]);
-                Toast.makeText(NewEventActivity.this,types[position],Toast.LENGTH_LONG).show();
+              //  Toast.makeText(NewEventActivity.this,types[position],Toast.LENGTH_LONG).show();
                 getSpinner = types[position];
             }
 
