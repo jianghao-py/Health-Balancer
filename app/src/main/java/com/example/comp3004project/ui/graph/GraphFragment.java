@@ -271,7 +271,7 @@ public class GraphFragment extends Fragment {
                             v1 = 1;
                         else
                             v1= Double.valueOf(show.getText().toString());
-                        double[] values_1 = {v1,v2,v3,30};
+                        double[] values_1 = {v1,v2,v3,300};
                         CategorySeries dataset_1=buildCategoryDataset("Graph", values_1);
                         int[] colors_1 ={Color.BLUE,Color.GREEN,Color.MAGENTA,Color.RED};
                         DefaultRenderer renderer_1=buildCategoryRenderer(colors_1);

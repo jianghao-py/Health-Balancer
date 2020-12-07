@@ -183,7 +183,7 @@ public class WorkOutRecordActivity extends AppCompatActivity {
 
     private void setRefreshPage(){
         finish();
-        startActivity( new Intent(this, RecordActivity.class));
+        startActivity( new Intent(this, WorkOutRecordActivity.class));
 
     }
 
